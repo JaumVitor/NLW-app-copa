@@ -26,6 +26,7 @@ model Pool {
 }
 
 model Participant {
+  // Tabela Pivô tratando relacionamentos n/n
   id String @id @default(cuid())
 
   poolId  String
@@ -35,7 +36,7 @@ model Participant {
   poll Pool @relation(fields: [poolId], references: [id])
   user User @relation(fields: [userId], references: [id])
 
-  @@unique([userId, poolId])
+  @@unique([userId, poolId]) // Campos funcionarão como uma chave composta
 }
 
 model User {
