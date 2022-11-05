@@ -56,7 +56,8 @@ async function bootstrap(){
         }
       })
 
-      return reply.status(201).send({ code: code })
+      // Quando cria o bolão retorna o code
+      return reply.status(201).send({ code: code }) 
     }catch (e){
       return reply.status(400).send({ error: 'Value null' })
     }
