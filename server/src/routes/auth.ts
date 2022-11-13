@@ -3,8 +3,17 @@ import { prisma } from '../lib/prisma'
 import fetch from 'node-fetch'
 
 import { z } from 'zod'
+import { authenticate } from '../plugins/authenticate'
 
 export async function authRoutes(fastify: FastifyInstance){
+  fastify.get('/me', {
+    onRequest: [authenticate]
+  }, //middware de validação do jwt
+    async (request) => {
+      // Retornando user com token validado
+      return { user: request.user }
+  })
+
   fastify.post('/users', async (request, reply) => {
     const createUserBody = z.object({
       accessToken: z.string()
