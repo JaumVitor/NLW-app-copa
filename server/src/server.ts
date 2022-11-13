@@ -18,7 +18,7 @@ async function bootstrap(){
     origin: true
   })
 
-  //Registrando 
+  //Registrando rotas criadas
   await fastify.register(authRoutes)
   await fastify.register(gameRoutes)
   await fastify.register(guessRoutes)

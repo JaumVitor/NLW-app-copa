@@ -17,7 +17,7 @@ export async function poolRoutes(fastify: FastifyInstance){
       title: z.string(),
     })
 
-    // Vai tentar converter para o formato que criei, se não der dispara uma exception
+    // Vai tentar converter para o formato que criei, se não der, dispara uma exception
     try {
       const { title } = createPoolBody.parse(request.body)
       const generate = new ShortUniqueId({ length: 6 })
