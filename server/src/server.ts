@@ -1,4 +1,5 @@
 import Fastify from "fastify";
+import jwt from '@fastify/jwt'
 import cors from '@fastify/cors'
 
 // Importando rotas 
@@ -16,6 +17,11 @@ async function bootstrap(){
   await fastify.register(cors, {
     //Configurando quem pode acessar esse backend
     origin: true
+  })
+
+  //Em ambiente de produção deve ser uma variavel ambiente 
+  fastify.register(jwt, { 
+    secret: 'nlwcopa'
   })
 
   //Registrando rotas criadas

@@ -31,9 +31,38 @@ export async function authRoutes(fastify: FastifyInstance){
 
     const userInfo = userInfoSchema.parse(userData)
 
+    //Criando o user com base nos dados capturados 
+    let user = await prisma.user.findUnique({
+      where: {
+        googleId: userInfo.id
+      }
+    })
+
+    //Caso o user não seja encontrado, crio ele
+    if (!user) {
+      user = await prisma.user.create({
+        data: {
+          googleId: userInfo.id,
+          email: userInfo.email,
+          name: userInfo.name,
+          avatarUrl: userInfo.picture,
+        }
+      })
+    }
+
+    //encoded - informações encapsuladas, payload - info desencapsuladas
+    //Não recomendado colocar informações senviveis, pois o token é visivel (Não é criptografia)
+    const token = fastify.jwt.sign({
+      name: user.name,
+      avatarUrl: user.avatarUrl
+    }, {
+      sub: user.id,
+      expiresIn: '7 days'
+    })
+
     return reply.status(200).send({ 
-      status: 'Recived access token',
-      userInfo
+      status: 'Received access token',
+      token,
     })
   })
 }
