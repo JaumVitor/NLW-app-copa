@@ -59,6 +59,7 @@ export async function authRoutes(fastify: FastifyInstance){
       })
     }
 
+    // Tenho meu user criado, agora teremos que logar ele na aplicação usando jwt
     //encoded - informações encapsuladas, payload - info desencapsuladas
     //Não recomendado colocar informações senviveis, pois o token é visivel (Não é criptografia)
     const token = fastify.jwt.sign({
