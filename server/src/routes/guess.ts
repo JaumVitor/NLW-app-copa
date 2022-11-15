@@ -10,7 +10,10 @@ export async function guessRoutes(fastify: FastifyInstance){
     return reply.status(200).send( { count } )
   })
 
+<<<<<<< HEAD
   // Criar palpites dentro do bolão, de um jogo especificado
+=======
+>>>>>>> 227f60d4c1655f085f1c69ddd5d7e71d4a62c5a8
   fastify.post('/pools/:poolId/games/:gameId/guesses', {
     onRequest: [authenticate]
   }, async (request, reply) => {
