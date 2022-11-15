@@ -66,11 +66,13 @@ model Guess {
 
   firtTeamPoints   Int
   secondTeamPoints Int
-  createdAt        DateTime
+  createdAt        DateTime @default(now())
 
   gameId        String
   participantId String
 
   game        Game        @relation(fields: [gameId], references: [id])
   participant Participant @relation(fields: [participantId], references: [id])
+
+  @@unique([participantId, gameId])
 }
