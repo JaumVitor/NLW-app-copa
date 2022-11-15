@@ -124,7 +124,7 @@ export async function poolRoutes(fastify: FastifyInstance){
     })
   })
 
-  // Bolões usuario participa
+  // Bolões que usuario participa
   fastify.get('/pools', {
     onRequest: [authenticate]
   },
